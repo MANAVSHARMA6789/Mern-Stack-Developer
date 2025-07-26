@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .header-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 10px;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .header-image img {
+            height: 40px; /* Adjusted height for better visibility */
+            width: 40px; /* Adjusted width for better visibility */
+            margin-right: 10px;
+        }
+        .header-image span {
+            font-size: 24px; /* Title font size */
+            color: #2c3e50; /* Title color */
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .submit-cell {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-image">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/123f752b-252c-4b54-ac9a-b263bf0b3833.png" alt="PDF document icon" style="height:40px;width:40px">
+            <span>STUDENT REGISTRATION FORM</span>
+        </div>
+
+        <form>
+            <table>
+                <tr>
+                    <th colspan="2">Personal Information</th>
+                </tr>
+                <tr>
+                    <td width="30%"><label for="name">Name:</label></td>
+                    <td><input id="name" type="text" placeholder="Enter your name" required></td>
+                </tr>
+                <tr>
+                    <td><label for="email">E-mail:</label></td>
+                    <td><input id="email" type="email" placeholder="Enter your email" required></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password:</label></td>
+                    <td><input id="password" type="password" placeholder="Enter your password" required></td>
+                </tr>
+                <tr>
+                    <td><label for="roll">Roll no:</label></td>
+                    <td><input id="roll" type="number" placeholder="12345" required></td>
+                </tr>
+                <tr>
+                    <td><label for="date">Date of Birth:</label></td>
+                    <td><input id="date" type="date" required></td>
+                </tr>
+                <tr>
+                    <td><label for="class">Class:</label></td>
+                    <td>
+                        <select id="class" required>
+                            <option value="">--Select Class--</option>
+                            <option value="MCA">MCA</option>
+                            <option value="BCA">BCA</option>
+                            <option value="BTECH">BTECH</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">Academic Information</th>
+                </tr>
+                <tr>
+                    <td><label for="subject">Favourite Subject:</label></td>
+                    <td>
+                        <input id="subject" list="subjects" placeholder="Choose Subject" required>
+                        <datalist id="subjects">
+                            <option value="DSA">
+                            <option value="Mathematics">
+                            <option value="Physics">
+                            <option value="Chemistry">
+                            <option value="English">
+                        </datalist>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">Additional Information</th>
+                </tr>
+                <tr>
+                    <td><label>Address:</label></td>
+                    <td><textarea rows="5" placeholder="Enter your address" required></textarea></td>
+                </tr>
+                <tr>
+                    <td><label>Gender:</label></td>
+                    <td>
+                        <input type="radio" name="gender" value="male" required> Male<br>
+                        <input type="radio" name="gender" value="female"> Female<br>
+                        <input type="radio" name="gender" value="others"> Others<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Hobbies:</label></td>
+                    <td>
+                        <input type="checkbox" value="cycling"> Cycling<br>
+                        <input type="checkbox" value="sports"> Sports<br>
+                        <input type="checkbox" value="reading"> Reading<br>
+                        <input type="checkbox" value="music"> Music<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="submit-cell" colspan="2">
+                        <button type="submit">Submit Registration</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
