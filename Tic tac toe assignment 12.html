@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe Game</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .container { max-width: 400px; margin: 0 auto; }
+        .game-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin: 20px auto; }
+        .cell { width: 100px; height: 100px; border: 1px solid #ccc; display: flex; 
+                justify-content: center; align-items: center; font-size: 2.5rem; cursor: pointer; }
+        button { padding: 10px 20px; margin: 10px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tic-Tac-Toe</h1>
+        <p id="status">Player X's turn</p>
+        <div class="game-board">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+        <button id="resetBtn">Reset Game</button>
+        <div id="message" style="display:none"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cells = document.querySelectorAll('.cell'),
+                  statusDisplay = document.getElementById('status'),
+                  messageDisplay = document.getElementById('message'),
+                  resetBtn = document.getElementById('resetBtn');
+            
+            let gameActive = true;
+            let currentPlayer = 'X';
+            let gameState = ['', '', '', '', '', '', '', '', ''];
+            
+            const winningConditions = [
+                [0, 1, 2],
+                [3, 4, 5],
+                [6, 7, 8],
+                [0, 3, 6],
+                [1, 4, 7],
+                [2, 5, 8],
+                [0, 4, 8],
+                [2, 4, 6]
+            ];
+            
+            function handleCellClick(e) {
+                const clickedCell = e.target;
+                const clickedCellIndex = parseInt(clickedCell.getAttribute('data-index'));
+                
+                if (gameState[clickedCellIndex] !== '' || !gameActive) return;
+                
+                gameState[clickedCellIndex] = currentPlayer;
+                clickedCell.textContent = currentPlayer;
+                
+                checkResult();
+            }
+            
+            function checkResult() {
+                let roundWon = false;
+                
+                for (let i = 0; i < winningConditions.length; i++) {
+                    const [a, b, c] = winningConditions[i];
+                    if (gameState[a] === '' || gameState[b] !== gameState[a] || gameState[c] !== gameState[a]) continue;
+                    
+                    roundWon = true;
+                    break;
+                }
+                
+                if (roundWon) {
+                    messageDisplay.textContent = `Player ${currentPlayer} wins!`;
+                    messageDisplay.style.display = 'block';
+                    gameActive = false;
+                    return;
+                }
+                
+                if (!gameState.includes('')) {
+                    messageDisplay.textContent = "Game ended in a draw!";
+                    messageDisplay.style.display = 'block';
+                    gameActive = false;
+                    return;
+                }
+                
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                statusDisplay.textContent = `Player ${currentPlayer}'s turn`;
+            }
+            
+            function resetGame() {
+                gameActive = true;
+                currentPlayer = 'X';
+                gameState = ['', '', '', '', '', '', '', '', ''];
+                statusDisplay.textContent = `Player ${currentPlayer}'s turn`;
+                cells.forEach(cell => cell.textContent = '');
+                messageDisplay.style.display = 'none';
+            }
+            
+            cells.forEach(cell => cell.addEventListener('click', handleCellClick));
+            restartBtn.addEventListener('click', resetGame);
+            resetBtn.addEventListener('click', resetGame);
+        });
+    </script>
+</body>
+</html>
