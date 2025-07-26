@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MERN Time Table</title>
+    <link rel="icon" href="http://127.0.0.1:5500/youtube.png">
+    <style>
+        body {
+            background-image: url("/licensed-image.jfif");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+        }
+
+        h4 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for better readability */
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.2); /* Light background for even rows */
+        }
+    </style>
+</head>
+
+<body>
+    <h4>TIME TABLE</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>DAY/PERIOD</th>
+                <th>I<br>9:30-10:20</th>
+                <th>II<br>10:20-11:10</th>
+                <th>III<br>11:10-12:00</th>
+                <th rowspan="5">LUNCH</th>
+                <th>IV<br>12:40-1:30</th>
+                <th>V<br>1:30-2:20</th>
+                <th>VI<br>2:20-3:10</th>
+                <th>VII<br>3:10-4:00</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>MONDAY</td>
+                <td>ENGLISH</td>
+                <td>MATHS</td>
+                <td>CHEMISTRY</td>
+                <td colspan="3">LAB</td>
+                <td>PHYSICS</td>
+            </tr>
+            <tr>
+                <td>TUESDAY</td>
+                <td colspan="3">LAB</td>
+                <td>ENGLISH</td>
+                <td>CHEMISTRY</td>
+                <td>MATHS</td>
+                <td>SPORTS</td>
+            </tr>
+            <tr>
+                <td>WEDNESDAY</td>
+                <td>MATHS</td>
+                <td>PHYSICS</td>
+                <td>ENGLISH</td>
+                <td>CHEMISTRY</td>
+                <td colspan="3">LIBRARY</td>
+            </tr>
+            <tr>
+                <td>THURSDAY</td>
+                <td>PHYSICS</td>
+                <td>ENGLISH</td>
+                <td>CHEMISTRY</td>
+                <td colspan="3">LAB</td>
+                <td>MATHS</td>
+            </tr>
+            <tr>
+                <td>FRIDAY</td>
+                <td>PHYSICS</td>
+                <td>ENGLISH</td>
+                <td>CHEMISTRY</td>
+                <td colspan="3">LAB</td>
+                <td>MATHS</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
