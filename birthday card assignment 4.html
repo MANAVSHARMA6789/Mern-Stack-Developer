@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Birthday Card</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f8ff;
+            margin: 0;
+        }
+
+        .card {
+            position: relative;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .card-header {
+            margin-bottom: 20px;
+        }
+
+        .cake-image {
+            width: 100px;
+            height: auto;
+        }
+
+        .card-body {
+            margin-bottom: 20px;
+        }
+
+        .surprise-button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .balloon {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #ff69b4;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .balloon:before {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 50px;
+            background-color: #333;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Positioning balloons */
+        .balloon1 { top: -20px; left: 05%; background-color: #ff69b4; }
+        .balloon2 { top: -20px; left: 25%; background-color: #87ceeb; }
+        .balloon3 { top: -20px; left: 45%; background-color: #90EE90; }
+        .balloon4 { top: -20px; left: 65%; background-color: #ffa500; }
+        .balloon5 { top: -20px; left: 85%; background-color: #ff1493; }
+    </style>
+</head>
+<body>
+    <br>
+    <br>
+    <br>
+    <div class="card">
+        <div class="card-header">
+            <br>
+            <br>        
+            <br>
+            <br>
+            <h1>Happy Birthday Ankit</h1>
+            <img src="./bday.jpeg" alt="Birthday Cake" class="cake-image">
+        </div>
+        <div class="card-body">
+            <p>Wishing you a day filled with happiness, laughter, and sweet surprises!</p>
+            <p>Lots of love and blessings on your special day. May all your dreams come true. Keep smiling and shining always! ❤️</p>
+        </div>
+        <button class="surprise-button">Click for Surprise 🎉</button>
+
+        <!-- Balloons -->
+        <div class="balloon balloon1"></div>
+        <div class="balloon balloon2"></div>
+        <div class="balloon balloon3"></div>
+        <div class="balloon balloon4"></div>
+        <div class="balloon balloon5"></div>
+    </div>
+</body>
+</html>
