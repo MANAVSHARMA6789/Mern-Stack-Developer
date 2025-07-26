@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --danger: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            padding-top: 60px; /* Added to prevent overlap */
+        }
+
+        .theme-toggle {
+            position: fixed; /* Changed from absolute to fixed */
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            background: var(--secondary);
+        }
+
+        .calculator {
+            width: 320px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .display {
+            padding: 20px;
+            text-align: right;
+            background-color: #f8f9fa;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background-color: #ddd;
+        }
+
+        button {
+            border: none;
+            outline: none;
+            padding: 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            background-color: white;
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            filter: brightness(90%);
+        }
+
+        .operator {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+
+        .equals {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .clear {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        /* Dark theme styles */
+        body.dark-theme {
+            background-color: var(--dark);
+            color: var(--light);
+        }
+
+        body.dark-theme .calculator {
+            background-color: #333;
+        }
+
+        body.dark-theme .display {
+            background-color: #222;
+            color: white;
+        }
+
+        body.dark-theme button {
+            background-color: #444;
+            color: white;
+        }
+
+        body.dark-theme .operator {
+            background-color: #555;
+        }
+
+        body.dark-theme .buttons {
+            background-color: #222;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="theme-toggle">🌓</button>
+    <div class="calculator">
+        <div class="display">
+            <div class="current-operand">0</div>
+        </div>
+        <div class="buttons">
+            <button class="clear" data-action="clear">AC</button>
+            <button data-action="number">7</button>
+            <button data-action="number">8</button>
+            <button data-action="number">9</button>
+            <button class="operator" data-action="divide">÷</button>
+
+            <button data-action="number">4</button>
+            <button data-action="number">5</button>
+            <button data-action="number">6</button>
+            <button class="operator" data-action="multiply">×</button>
+
+            <button data-action="number">1</button>
+            <button data-action="number">2</button>
+            <button data-action="number">3</button>
+            <button class="operator" data-action="subtract">-</button>
+
+            <button data-action="number">0</button>
+            <button data-action="equals">=</button>
+            <button class="operator" data-action="add">+</button>
+        </div>
+    </div>
+
+    <script>
+        class SimpleCalculator {
+            constructor(currentOperandElement) {
+                this.currentOperandElement = currentOperandElement;
+                this.clear();
+            }
+
+            clear() {
+                this.currentOperand = '0';
+                this.updateDisplay();
+            }
+
+            appendNumber(number) {
+                if (this.currentOperand === '0') {
+                    this.currentOperand = number.toString();
+                } else {
+                    this.currentOperand += number.toString();
+                }
+                this.updateDisplay();
+            }
+
+            chooseOperation(operation) {
+                if (this.currentOperand === '') return;
+                this.operation = operation;
+                this.previousOperand = this.currentOperand;
+                this.currentOperand = '';
+            }
+
+            compute() {
+                let computation;
+                const prev = parseFloat(this.previousOperand);
+                const current = parseFloat(this.currentOperand);
+                if (isNaN(prev) || isNaN(current)) return;
+
+                switch (this.operation) {
+                    case '+':
+                        computation = prev + current;
+                        break;
+                    case '-':
+                        computation = prev - current;
+                        break;
+                    case '×':
+                        computation = prev * current;
+                        break;
+                    case '÷':
+                        computation = prev / current;
+                        break;
+                    default:
+                        return;
+                }
+
+                this.currentOperand = computation.toString();
+                this.operation = undefined;
+                this.previousOperand = '';
+                this.updateDisplay();
+            }
+
+            updateDisplay() {
+                this.currentOperandElement.innerText = this.currentOperand;
+            }
+        }
+
+        const currentOperandElement = document.querySelector('.current-operand');
+        const calculator = new SimpleCalculator(currentOperandElement);
+
+        const numberButtons = document.querySelectorAll('[data-action="number"]');
+        const operationButtons = document.querySelectorAll('.operator');
+        const clearButton = document.querySelector('.clear');
+        const equalsButton = document.querySelector('[data-action="equals"]');
+
+        numberButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                calculator.appendNumber(button.innerText);
+            });
+        });
+
+        operationButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                calculator.chooseOperation(button.innerText);
+            });
+        });
+
+        equalsButton.addEventListener('click', () => {
+            calculator.compute();
+        });
+
+        clearButton.addEventListener('click', () => {
+            calculator.clear();
+        });
+
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            themeToggle.textContent = document.body.classList.contains('dark-theme') ? '🌞' : '🌓';
+        });
+    </script>
+</body>
+
+</html>
